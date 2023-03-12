@@ -113,4 +113,4 @@ If you find our work useful, please consider citing:
 ```
 
 ### Acknowledgement
-This work was supported by ams OSRAM.# GeoNeRF_Mod
+This work was supported by ams OSRAM.
