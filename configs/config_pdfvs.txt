@@ -1,0 +1,17 @@
+### INPUT
+expname = scan21_test
+logdir = ./logs
+nb_views = 3    #### use 9 for both evaluation and fine-tuning
+
+## dataset
+dataset_name = pdfvs
+pdfvs_path = ../data/setup_0218_wsz_3/
+pdfvs_pre_path = ../data/setup_0218_wsz_3/
+scene = trial_intro
+
+### TESTING
+chunk = 4096  ### Reduce it to save memory
+
+### TRAINING
+num_steps = 10000
+lrate = 0.0002

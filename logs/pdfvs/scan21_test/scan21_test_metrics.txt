@@ -1,0 +1,3 @@
+PSNR: nan
+SSIM: nan
+LPIPS: nan

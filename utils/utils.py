@@ -275,7 +275,7 @@ def get_rays(
 
     # Translate camera frame's origin to the world frame. It is the origin of all rays.
     rays_dir = (
-        dirs @ c2w_target[:3, :3].t()
+        dirs @ c2w_target[:3, :3].t().float()
     )  # dot product, equals to: [c2w.dot(dir) for dir in dirs]
     rays_orig = c2w_target[:3, -1].clone().reshape(1, 3).expand(rays_dir.shape[0], -1)
 
@@ -299,15 +299,15 @@ def conver_to_ndc(ray_pts, w2c_ref, intrinsics_ref, W_H, depth_values):
 
     grid = ray_pts_ndc[None, None, :, :2] * 2 - 1
     near = F.grid_sample(
-        depth_values[:, :1],
-        grid,
+        depth_values[:, :1].float(),
+        grid.float(),
         align_corners=True,
         mode="bilinear",
         padding_mode="border",
     ).squeeze()
     far = F.grid_sample(
-        depth_values[:, -1:],
-        grid,
+        depth_values[:, -1:].float(),
+        grid.float(),
         align_corners=True,
         mode="bilinear",
         padding_mode="border",
@@ -486,7 +486,7 @@ def interpolate_3D(feats, pts_ndc):
     grid = pts_ndc.view(-1, 1, H, W, 3) * 2 - 1.0  # [1 1 H W 3] (x,y,z)
     features = (
         F.grid_sample(
-            feats, grid, align_corners=True, mode="bilinear", padding_mode="border"
+            feats.float(), grid.float(), align_corners=True, mode="bilinear", padding_mode="border"
         )[:, :, 0]
         .permute(2, 3, 0, 1)
         .squeeze()
@@ -500,14 +500,14 @@ def interpolate_2D(feats, imgs, pts_ndc):
     grid = pts_ndc[..., :2].view(-1, H, W, 2) * 2 - 1.0  # [1 H W 2] (x,y)
     features = (
         F.grid_sample(
-            feats, grid, align_corners=True, mode="bilinear", padding_mode="border"
+            feats.float(), grid.float(), align_corners=True, mode="bilinear", padding_mode="border"
         )
         .permute(2, 3, 1, 0)
         .squeeze()
     )
     images = (
         F.grid_sample(
-            imgs, grid, align_corners=True, mode="bilinear", padding_mode="border"
+            imgs.float(), grid.float(), align_corners=True, mode="bilinear", padding_mode="border"
         )
         .permute(2, 3, 1, 0)
         .squeeze()

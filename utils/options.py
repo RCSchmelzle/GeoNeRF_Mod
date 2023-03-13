@@ -26,7 +26,7 @@ def config_parser():
     parser.add_argument("--config", is_config_file=True, help="Config file path")
 
     # Datasets options
-    parser.add_argument("--dataset_name", type=str, default="llff", choices=["llff", "nerf", "dtu"],)
+    parser.add_argument("--dataset_name", type=str, default="llff", choices=["llff", "nerf", "dtu", "pdfvs"],)
     parser.add_argument("--llff_path", type=str, help="Path to llff dataset")
     parser.add_argument("--llff_test_path", type=str, help="Path to llff dataset")
     parser.add_argument("--dtu_path", type=str, help="Path to dtu dataset")
@@ -35,6 +35,8 @@ def config_parser():
     parser.add_argument("--ams_path", type=str, help="Path to ams dataset")
     parser.add_argument("--ibrnet1_path", type=str, help="Path to ibrnet1 dataset")
     parser.add_argument("--ibrnet2_path", type=str, help="Path to ibrnet2 dataset")
+    parser.add_argument("--pdfvs_path", type=str, help="Path to PDFVS dataset")
+    parser.add_argument("--pdfvs_pre_path", type=str, help="Path to pre_PDFVS dataset")
 
     # Training options
     parser.add_argument("--batch_size", type=int, default=512)

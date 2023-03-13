@@ -26,6 +26,8 @@ import numpy as np
 from data.llff import LLFF_Dataset
 from data.dtu import DTU_Dataset
 from data.nerf import NeRF_Dataset
+from data.pdfvs import PDFVS_Dataset
+
 
 def get_training_dataset(args, downsample=1.0):
     train_datasets = [
@@ -107,6 +109,16 @@ def get_finetuning_dataset(args, downsample=1.0):
             nb_views=args.nb_views,
             scene=args.scene,
         )
+    elif args.dataset_name == "pdfvs":
+        train_dataset = PDFVS_Dataset(
+            original_root_dir=args.pdfvs_path,
+            preprocessed_root_dir=args.pdfvs_pre_path,
+            split="train",
+            max_len=-1,
+            downSample=downsample,
+            nb_views=args.nb_views,
+            scene=args.scene,
+        )
 
     train_sampler = None
 
@@ -142,6 +154,16 @@ def get_validation_dataset(args, downsample=1.0):
     elif args.dataset_name == "nerf":
         val_dataset = NeRF_Dataset(
             root_dir=args.nerf_path,
+            split="val",
+            max_len=max_len,
+            downSample=downsample,
+            nb_views=args.nb_views,
+            scene=args.scene,
+        )
+    elif args.dataset_name == "pdfvs":
+        val_dataset = PDFVS_Dataset(
+            original_root_dir=args.pdfvs_path,
+            preprocessed_root_dir=args.pdfvs_pre_path,
             split="val",
             max_len=max_len,
             downSample=downsample,

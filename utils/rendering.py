@@ -142,7 +142,6 @@ def get_angle_wrt_src_cams(c2ws, rays_pts, rays_dir_unit):
 def interpolate_pts_feats(imgs, feats_fpn, feats_vol, rays_pts_ndc):
     nb_views = feats_fpn.shape[1]
     interpolated_feats = []
-
     for i in range(nb_views):
         ray_feats_0 = interpolate_3D(
             feats_vol[f"level_0"][:, i], rays_pts_ndc[f"level_0"][:, :, i]
@@ -184,8 +183,8 @@ def get_occ_masks(depth_map_norm, rays_pts_ndc, visibility_thr=0.2):
         # [1 H W 3] (x,y,z)
         grid = rays_pts_ndc[f"level_0"][None, :, :, i, :2] * 2 - 1.0
         rays_depths = F.grid_sample(
-            depth_map_norm["level_0"][:, i : i + 1],
-            grid,
+            depth_map_norm["level_0"][:, i : i + 1].float(),
+            grid.float(),
             align_corners=True,
             mode="bilinear",
             padding_mode="border",

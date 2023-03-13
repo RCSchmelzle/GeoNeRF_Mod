@@ -317,7 +317,7 @@ class Renderer(nn.Module):
 
         ## Concatenating positional encodings and predicting RGB weights
         rgb_tokens = torch.cat([tokens[:, :-1], viewdirs], dim=-1)
-        rgb_tokens = F.elu(self.rgb_fc1(rgb_tokens))
+        rgb_tokens = F.elu(self.rgb_fc1(rgb_tokens.float()))
         rgb_tokens = F.elu(self.rgb_fc2(rgb_tokens))
         rgb_w = self.rgb_fc3(rgb_tokens)
         rgb_w = masked_softmax(rgb_w, masks[:, :-1], dim=1)

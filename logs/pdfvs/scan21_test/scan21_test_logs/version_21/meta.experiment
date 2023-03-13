@@ -1,0 +1,1 @@
+{"name": "scan21_test_logs", "version": 21, "tags_path": "./logs/pdfvs/scan21_test/scan21_test_logs/version_21/meta_tags.csv", "metrics_path": "./logs/pdfvs/scan21_test/scan21_test_logs/version_21/metrics.csv", "autosave": false, "description": null, "created_at": "2023-03-13 01:45:08.261112", "exp_hash": "scan21_test_logs_v21"}

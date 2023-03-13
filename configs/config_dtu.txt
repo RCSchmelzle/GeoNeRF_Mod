@@ -5,8 +5,8 @@ nb_views = 9    #### use 9 for both evaluation and fine-tuning
 
 ## dataset
 dataset_name = dtu
-dtu_path = Path to DTU MVS
-dtu_pre_path = Path to preprocessed DTU MVS
+dtu_path = ../ENeRF/ENeRF_workspace/dtu/
+dtu_pre_path = ../ENeRF/ENeRF_workspace/dtu/
 scene = scan21
 
 ### TESTING
