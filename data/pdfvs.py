@@ -163,7 +163,7 @@ class PDFVS_Dataset(Dataset):
             ext = np.concatenate([ext, np.array([[0, 0, 0, 1]])], axis=0)
             ext[:3, 3] *= self.scale_factor
 
-            ixt[:2] = ixt[:2] * 4
+            ixt[:2] = ixt[:2]
             # ixt[0, 2] -= W_crop
             # ixt[1, 2] -= H_crop
 
@@ -304,6 +304,8 @@ class PDFVS_Dataset(Dataset):
 
             intrinsic = self.intrinsics[index_mat].copy()
             intrinsic[:2] = intrinsic[:2] * noisy_factor
+            intrinsic[0, 2] -= W_crop
+            intrinsic[1, 2] -= H_crop
             intrinsics.append(intrinsic)
 
             w2c = self.world2cams[index_mat]
